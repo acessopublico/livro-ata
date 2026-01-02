@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BRASFORT | Livro Ata Digital</title>
+
+<!-- Fonte Barlow -->
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ================= BASE ================= */
+* {
+    box-sizing: border-box;
+    font-family: 'Barlow', sans-serif;
+}
+
+body {
+    margin: 0;
+    overflow: hidden;
+    background: #000B29;
+}
+
+/* ================= INTRO / LOADER ================= */
+.loader {
+    position: fixed;
+    inset: 0;
+    background: #000B29;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    transition: opacity .30s ease, visibility .30s ease;
+}
+
+.loader.fade-out {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.loader img {
+    height: 38px;
+    opacity: 0;
+    transform: translateY(25px);
+}
+
+/* ================= LOGIN BACKGROUND ================= */
+.login-bg {
+    position: fixed;
+    inset: 0;
+    background:
+        linear-gradient(#000B29),
+        url('https://pro.brasfort.com.br/Includes/img/background_brasfort.png')
+        no-repeat center center fixed;
+    background-size: cover;
+
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.8s ease;
+}
+
+
+/* ================= LAYOUT ================= */
+.page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+}
+
+/* ================= CARD ================= */
+.container {
+    background: rgba(255, 255, 255, 0.96);
+    width: 100%;
+    max-width: 380px;
+    padding: 32px 30px;
+    border-radius: 14px;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.35);
+
+    /* ⬇️ CONTROLE DA VELOCIDADE DA ENTRADA DO LOGIN ⬇️ */
+    animation: slideUp 0.8s ease forwards;
+
+    opacity: 0.95;
+    border: 1.5px solid #4dcdff;
+}
+
+/* ================= SAÍDA SUAVE DO LOGIN ================= */
+.container.exit {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.98);
+    transition: all 0.58s ease; /* ⏱️ CONTROLE DO TEMPO DA SAÍDA */
+}
+
+/* ================= LOGO LOGIN ================= */
+.login-logo {
+    width: 180px;
+    display: block;
+    margin: 0 auto 18px;
+}
+
+/* ================= TÍTULO ================= */
+.container h2 {
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 22px;
+    color: #203a43;
+}
+
+/* ================= INPUTS ================= */
+.container input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 14px;
+    font-size: 14px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+.container input:focus {
+    outline: none;
+    border-color: #457fca;
+    box-shadow: 0 0 0 2px rgba(69,127,202,0.2);
+}
+
+/* ================= BOTÃO ================= */
+.container button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #1abadf, #075aa7);
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.container button:hover {
+    box-shadow: 0 10px 22px rgba(69,127,202,0.4);
+}
+
+/* ================= ANIMAÇÃO ================= */
+@keyframes slideUp {
+    from {
+        transform: translateY(60px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* ================= MOBILE ================= */
+@media (max-width: 768px) {
+    .page {
+        justify-content: center;
+        padding: 20px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ================= INTRO ================= -->
+<div class="loader" id="loader">
+    <img
+        src="https://www.brasfort.com.br/images/brasfort-logo-01.png"
+        id="introLogo"
+        alt="Brasfort"
+    >
+</div>
+
+<!-- ================= LOGIN ================= -->
+<div class="login-bg" id="login">
+    <div class="page">
+        <div class="container">
+
+            <img
+                class="login-logo"
+                src="https://pro.brasfort.com.br/Includes/img/Empresas/brasfort_logo.png"
+                alt="Brasfort"
+            >
+
+            <h2>Instruções do Livro Ata Digital</h2>
+
+            <form method="POST" id="loginForm">
+                <input type="text" id="nome" name="nome" placeholder="Nome completo" required>
+                <input type="text" id="matricula" name="matricula" placeholder="Matrícula (5 números)" maxlength="5" required>
+                <input type="text" id="posto" name="posto" placeholder="Posto de Serviço" required>
+                <button type="submit">ACESSAR</button>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<script>
+/* ================= INTRO ANIMAÇÃO ================= */
+
+/* ⏱️ CONTROLE DO TEMPO DA INTRO (ms)
+   1500 = rápido | 2000 = padrão | 3000 = cinematográfico */
+const INTRO_DURATION = 2000;
+
+const logo = document.getElementById('introLogo');
+const loader = document.getElementById('loader');
+const login = document.getElementById('login');
+
+let start = null;
+
+function animateIntro(timestamp) {
+    if (!start) start = timestamp;
+    const progress = Math.min((timestamp - start) / INTRO_DURATION, 1);
+
+    logo.style.opacity = progress;
+    logo.style.transform = `translateY(${25 * (1 - progress)}px)`;
+
+    if (progress < 1) {
+        requestAnimationFrame(animateIntro);
+    } else {
+        loader.classList.add('fade-out');
+
+        setTimeout(() => {
+        loader.classList.add('fade-out');
+
+        login.style.opacity = '1';
+        login.style.visibility = 'visible';
+    }, 100);
+
+    }
+}
+
+requestAnimationFrame(animateIntro);
+
+/* ================= CAMPOS INTELIGENTES ================= */
+document.getElementById('nome').addEventListener('input', function () {
+    const minusculas = ['de', 'da', 'do', 'dos', 'das'];
+    this.value = this.value
+        .toLowerCase()
+        .split(' ')
+        .map(p => minusculas.includes(p)
+            ? p
+            : p.charAt(0).toUpperCase() + p.slice(1))
+        .join(' ');
+});
+
+document.getElementById('matricula').addEventListener('input', function () {
+    this.value = this.value.replace(/\D/g, '').slice(0, 5);
+});
+
+document.getElementById('posto').addEventListener('input', function () {
+    this.value = this.value.toUpperCase();
+});
+/* ================= SAÍDA SUAVE AO SUBMIT ================= */
+
+/* ⏱️ CONTROLE DO TEMPO DA SAÍDA (ms)
+   Deve ser igual ou maior que o transition do CSS */
+const EXIT_DURATION = 800;
+
+const form = document.getElementById('loginForm');
+const container = document.querySelector('.container');
+
+form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    /* Validação nativa HTML5 */
+    if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+    }
+
+    /* Anima saída */
+    container.classList.add('exit');
+
+    /* Submete após animação */
+    setTimeout(() => {
+        form.submit();
+    }, EXIT_DURATION);
+});
+</script>
+
+</body>
+</html>

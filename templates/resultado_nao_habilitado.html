@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BRASFORT | Livro Ata Digital</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ================= TOKENS ================= */
+        :root {
+            /* Identidade */
+            --primary: #011238;
+            --accent: #BC9C63;
+
+            /* Neutros */
+            --bg: #f8fafc;
+            --card: #ffffff;
+            --cinza: #e5e7eb;
+            --border-soft: #e2e8f0;
+
+            /* Texto */
+            --text: #1f2933;
+            --muted: #64748b;
+
+            /* Negativo */
+            --danger: #b91c1c;
+            --danger-dark: #991b1b;
+            --danger-bg: #fff5f5;
+            --danger-soft: #fee2e2;
+
+            /* Positivo */
+            --success: #16a34a;
+            --success-dark: #15803d;
+            --success-bg: #f0fdf4;
+            --success-border: #86efac;
+        }
+
+        /* ================= BASE ================= */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            font-family: 'Barlow', sans-serif;
+            color: var(--text);
+        }
+
+        /* ================= LAYOUT ================= */
+        .wrapper {
+            max-width: 1100px;
+            margin: auto;
+            padding: 36px 24px 56px;
+        }
+
+        /* ================= HEADER ================= */
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            padding-bottom: 24px;
+            margin-bottom: 28px;
+            border-bottom: 1px solid var(--border-soft);
+        }
+
+        .header img {
+            width: 52px;
+            background: #fff;
+            border-radius: 12px;
+            border: 1px solid var(--border-soft);
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: .95rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .header small {
+            color: var(--muted);
+        }
+
+        /* ================= CARD ================= */
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border-soft);
+            border-radius: 14px;
+            padding: 22px 24px;
+        }
+
+        /* ================= STATUS (NEGATIVO CONTROLADO) ================= */
+        .status {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 20px;
+            align-items: center;
+            margin-bottom: 28px;
+            padding: 22px;
+            border-left: 6px solid var(--danger);
+            background: linear-gradient(135deg, var(--danger-bg), var(--danger-soft));
+        }
+
+        .status-icon {
+            font-size: 2.4rem;
+            color: var(--danger);
+        }
+
+        .status h2 {
+            margin: 0 0 6px;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--danger-dark);
+        }
+
+        .status p {
+            margin: 0;
+            color: #7f1d1d;
+        }
+
+        /* ================= INFO ================= */
+        .info {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        @media (max-width: 900px) {
+            .info {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .info-item {
+            border-right: 1px solid var(--border-soft);
+            padding-right: 14px;
+        }
+
+        .info-item:last-child {
+            border-right: none;
+        }
+
+        .info-item small {
+            display: block;
+            font-size: .8rem;
+            color: var(--muted);
+        }
+
+        .info-item strong {
+            font-size: .95rem;
+        }
+
+        /* ================= RESULTADO ================= */
+        .score {
+            display: grid;
+            grid-template-columns: 1.3fr .7fr;
+            gap: 28px;
+            align-items: center;
+            margin-bottom: 36px;
+        }
+
+        @media (max-width: 760px) {
+            .score {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .score h3 {
+            margin: 0 0 10px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .score p {
+            color: var(--text);
+            line-height: 1.5;
+        }
+
+        /* ================= RADIAL ================= */
+        .radial {
+            width: 160px;
+            height: 160px;
+            margin: auto;
+        }
+
+        .radial circle {
+            fill: none;
+            stroke-width: 12;
+        }
+
+        .radial .bg {
+            stroke: #e5e7eb;
+        }
+
+        .radial .progress {
+            stroke: var(--danger);
+            stroke-linecap: round;
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+        }
+
+        .radial text {
+            font-size: 1rem;
+            font-weight: 600;
+            fill: var(--danger-dark);
+        }
+
+        /* ================= SEÇÕES ================= */
+        .sections {
+            display: grid;
+            gap: 14px;
+        }
+
+        .section {
+            padding: 16px 18px;
+            border: 1px solid var(--border-soft);
+            border-radius: 12px;
+            background: #ffffff;
+        }
+
+        .bar {
+            height: 6px;
+            background: #e5e7eb;
+            border-radius: 6px;
+            margin-top: 10px;
+        }
+
+        .bar span {
+            display: block;
+            height: 100%;
+            background: var(--success);
+            border-radius: 6px;
+        }
+
+        /* ================= BOTÃO PRINT ================= */
+        .fab-print {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 10000;
+        }
+
+        .fab-print button {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            padding: 14px 22px;
+            border-radius: 999px;
+            font-family: 'Barlow';
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, .18);
+            transition: .25s;
+        }
+
+        .fab-print button:hover {
+            transform: translateY(-2px);
+            background: #020b2c;
+        }
+
+        /* ================= QUESTÕES ================= */
+        .questions-wrapper {
+            margin-top: 40px;
+        }
+
+        .toggle-questions {
+            width: 100%;
+            background: #fff;
+            border: 1px solid var(--cinza);
+            padding: 16px 20px;
+            border-radius: 12px;
+            font-family: 'Barlow';
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--primary);
+        }
+
+        .toggle-questions:hover {
+            background: #f1f5f9;
+        }
+
+        .toggle-questions i {
+            transition: transform .3s ease;
+        }
+
+        .toggle-questions.active i {
+            transform: rotate(180deg);
+        }
+
+        .questions {
+            margin-top: 16px;
+            display: none;
+            gap: 14px;
+        }
+
+        /* ================= QUESTÃO ================= */
+        .question {
+            border-radius: 12px;
+            padding: 16px 18px;
+            border: 1px solid var(--border-soft);
+            background: #fff;
+        }
+
+        .question.correct {
+            border-left: 6px solid var(--success);
+            background: var(--success-bg);
+        }
+
+        .question.wrong {
+            border-left: 6px solid var(--danger);
+            background: var(--danger-bg);
+        }
+
+        .question strong {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: .95rem;
+        }
+
+        .question.correct strong {
+            color: var(--success-dark);
+        }
+
+        .question.correct i {
+            color: var(--success);
+        }
+
+        .question.wrong i {
+            color: var(--danger);
+        }
+
+        /* ================= EXPLICAÇÃO ================= */
+        .explain {
+            margin-top: 10px;
+            font-size: .9rem;
+            line-height: 1.5;
+        }
+
+        .explain p {
+            margin: 4px 0;
+        }
+
+        .explain em {
+            display: block;
+            margin-top: 6px;
+            color: var(--muted);
+            font-style: normal;
+        }
+
+        /* ================= DOCUMENTAÇÃO ACTION ================= */
+        .doc-action {
+            margin-top: 48px;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* BOTÃO PULSANTE */
+        .btn-doc {
+            position: relative;
+
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+
+            padding: 16px 30%;
+            border-radius: 14px;
+
+            background: linear-gradient(135deg, var(--primary), #020b2c);
+            color: #fff;
+
+            font-family: 'Barlow', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+
+            box-shadow: 0 10px 28px rgba(1, 18, 56, 0.35);
+            transition: all .25s ease;
+
+            margin-bottom: 80px;
+            /* afasta do rodapé */
+
+            animation: docPulse 1.8s infinite;
+        }
+
+        /* ÍCONE */
+        .btn-doc i {
+            font-size: 1.1rem;
+        }
+
+        /* HOVER */
+        .btn-doc:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 16px 38px rgba(5, 132, 223, 0.45);
+        }
+
+        /* HALO / GLOW EXTERNO */
+        .btn-doc::before {
+            content: "";
+            position: absolute;
+            inset: -18px;
+
+            background: radial-gradient(circle,
+                    rgba(140, 140, 140, 0.106),
+                    rgba(34, 148, 197, 0) 70%);
+
+            border-radius: 22px;
+            z-index: -1;
+        }
+
+        /* ANIMAÇÃO DE PULSO */
+        @keyframes docPulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(0, 153, 255, 0.55);
+            }
+
+            70% {
+                box-shadow: 0 0 0 16px rgba(34, 197, 94, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+            }
+        }
+
+
+
+        /* ================= PRINT ================= */
+        @media print {
+            .fab-print {
+                display: none;
+            }
+
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="wrapper">
+
+        <!-- HEADER -->
+        <div class="header">
+            <img src="/static/logo-brasfort.png">
+            <div>
+                <h1>BRASFORT PRO</h1>
+                <small>Relatório de Avaliação</small>
+            </div>
+        </div>
+
+        <!-- STATUS -->
+        <div class="card status">
+            <div class="status-icon">
+                <i class="fa-solid fa-circle-exclamation"></i>
+            </div>
+            <div>
+                <h2>Resultado abaixo do esperado</h2>
+                <p>
+                    O desempenho nesta etapa ficou abaixo do percentual mínimo (90%).
+                    Os acertos obtidos foram registrados e servirão de base para
+                    a próxima capacitação.
+                </p>
+            </div>
+        </div>
+
+        <!-- IDENTIFICAÇÃO -->
+        <div class="card info">
+            <div class="info-item"><small>Colaborador</small><strong>{{ nome }}</strong></div>
+            <div class="info-item"><small>Matrícula</small><strong>{{ matricula }}</strong></div>
+            <div class="info-item"><small>Posto</small><strong>{{ posto }}</strong></div>
+            <div class="info-item"><small>Duração</small><strong>{{ tempo }}</strong></div>
+        </div>
+
+        <!-- RESULTADO -->
+        <div class="card score">
+            <div>
+                <h3>Feedback da Avaliação</h3>
+                <p>
+                    O colaborador deverá revisar o conteúdo aplicado e participar de nova capacitação antes de uma próxima reavaliação, conforme as diretrizes operacionais da Brasfort, para garantir a real compreensão do conteúdo.
+                </p>
+            </div>
+
+            <svg class="radial" viewBox="0 0 120 120">
+                {% set r = 52 %}
+                {% set c = 2 * 3.1416 * r %}
+                <circle class="bg" cx="60" cy="60" r="{{ r }}" />
+                <circle class="progress" cx="60" cy="60" r="{{ r }}" stroke-dasharray="{{ c }}"
+                    stroke-dashoffset="{{ c - (nota/100)*c }}" />
+                <text x="60" y="66" text-anchor="middle">{{ nota }}%</text>
+            </svg>
+        </div>
+
+        <!-- DETALHAMENTO -->
+        <div class="sections">
+            {% for i in range(1,6) %}
+            <div class="section">
+                <strong>Seção {{ i }} – {{ secoes_nomes[i] }}</strong>
+                <div class="bar">
+                    <span style="width:{{ secoes[i-1] }}%"></span>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- FAB -->
+        <div class="fab-print">
+            <button onclick="window.print()">
+                <i class="fa-solid fa-file-pdf"></i>
+                Download Resultado
+            </button>
+        </div>
+        <!-- ================= QUESTÕES ================= -->
+        <div class="questions-wrapper">
+
+            <button class="toggle-questions" onclick="toggleQuestions(this)">
+                <span>
+                    <i class="fa-solid fa-list-check"></i>
+                    Ver detalhamento das questões
+                </span>
+                <i class="fa-solid fa-chevron-down"></i>
+            </button>
+
+            <div class="questions" id="questionsBox">
+                {% for q in questoes %}
+                <div class="question {{ 'correct' if q.acertou else 'wrong' }}">
+
+                    <strong>
+                        {% if q.acertou %}
+                        <i class="fa-solid fa-circle-check"></i>
+                        Questão {{ q.numero }} – Resposta correta
+                        {% else %}
+                        <i class="fa-solid fa-circle-xmark"></i>
+                        Questão {{ q.numero }} – Resposta incorreta
+                        {% endif %}
+                    </strong>
+
+                    <div class="explain">
+                        <p><strong>Sua resposta:</strong> {{ q.marcada or 'Não respondida' }}</p>
+                    </div>
+
+                </div>
+                {% endfor %}
+            </div>
+
+        </div>
+        <!-- ================= DOCUMENTAÇÃO ================= -->
+        <div class="doc-action">
+            <a href="/documentacao" class="btn-doc">
+                <i class="fa fa-undo" aria-hidden="true"></i>
+                Voltar para Documentação
+            </a>
+        </div>
+
+
+
+    </div>
+
+</body>
+
+<script>
+    function toggleQuestions(button) {
+        const box = document.getElementById('questionsBox');
+        button.classList.toggle('active');
+
+        if (box.style.display === 'grid') {
+            box.style.display = 'none';
+        } else {
+            box.style.display = 'grid';
+        }
+    }
+</script>
+
+
+</html>

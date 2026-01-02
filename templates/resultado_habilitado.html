@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BRASFORT | Livro Ata Digital</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #011238;
+            --secondary: #124d7a;
+            --accent: #BC9C63;
+
+            --bg: #f6f8fb;
+            --card: #ffffff;
+            --border: #dfe4ec;
+            --text: #1f2937;
+            --muted: #6b7280;
+            --success: #166534;
+            --caramelo: #D2AE6D;
+            --vermelho: #e63946;
+            --cinza: #A9ABAE;
+            --azul-escuro: #263868;
+            --azul-claro: #0096D1;
+            --branco: #fefefe;
+            --preto: #000000;
+            --verde: #10c944
+        }
+
+        /* BASE */
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            font-family: 'Barlow', sans-serif;
+            color: var(--azul-escuro);
+        }
+
+        .wrapper {
+            max-width: 1100px;
+            margin: auto;
+            padding: 36px 24px 56px;
+        }
+
+        /* HEADER */
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            padding-bottom: 24px;
+            margin-bottom: 28px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header img {
+            width: 52px;
+            padding: 0px;
+            background: #fff;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 1rem;
+            font-weight: 900;
+            color: var(--azul-escuro);
+        }
+
+        .header small {
+            color: var(--muted);
+        }
+
+        /* CARD */
+        .card {
+            background: var(--branco);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 22px 24px;
+        }
+
+        /* STATUS POSITIVO */
+        .status {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 20px;
+            align-items: center;
+            margin-bottom: 28px;
+            border-left: 5px solid var(--verde);
+            background-color: #f0fdf4;
+
+        }
+
+        .status-icon {
+            font-size: 2.2rem;
+        }
+
+        .status h2 {
+            margin: 0 0 6px;
+            font-size: 1, 7rem;
+            font-weight: 600;
+            color: var(--verde);
+
+        }
+
+        /* IDENTIFICAÇÃO */
+        .info {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 32px;
+
+        }
+
+        /*mobile */
+        @media(max-width:900px) {
+            .info {
+                grid-template-columns: repeat(2, 1fr)
+            }
+        }
+
+        .info-item {
+            border-right: 1px solid var(--border);
+            padding-right: 14px;
+        }
+
+        .info-item:last-child {
+            border-right: none
+        }
+
+        .info-item small {
+            display: block;
+            color: var(--muted);
+            margin-bottom: 4px;
+            font-size: .85rem;
+        }
+
+        /* RESULTADO */
+        .score {
+            display: grid;
+            grid-template-columns: 1.3fr .7fr;
+            gap: 28px;
+            align-items: center;
+            margin-bottom: 36px;
+
+
+        }
+
+        @media(max-width:760px) {
+            .score {
+                grid-template-columns: 1fr
+            }
+        }
+
+
+
+        .score h3 {
+            margin: 0 0 10px;
+            font-weight: 600;
+            color: var(--azul-escuro);
+        }
+
+        .score p {
+            color: var(--muted);
+            line-height: 1.5;
+        }
+
+        /* RADIAL */
+        .radial {
+            width: 160px;
+            height: 160px;
+            margin: auto;
+        }
+
+        .radial circle {
+            fill: none;
+            stroke-width: 12;
+        }
+
+        .radial .bg {
+            stroke: #e2e8f0;
+        }
+
+        .radial .progress {
+            stroke: var(--verde);
+            stroke-linecap: round;
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+        }
+
+        .radial text {
+            font-size: 1rem;
+            font-weight: 600;
+            fill: var(--azul-escuro);
+
+        }
+
+        /* DETALHAMENTO */
+        .sections {
+            display: grid;
+            gap: 12px;
+        }
+
+        .section {
+            padding: 16px 18px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: var(--branco);
+        }
+
+        .bar {
+            height: 6px;
+            background: #e5e9f0;
+            border-radius: 6px;
+            margin-top: 10px;
+        }
+
+        /* ================= FAB PRINT ================= */
+        .fab-print {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 10000;
+            animation: fabIn 0.8s ease-out forwards;
+        }
+
+        .fab-print button {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--azul-escuro);
+            color: #fff;
+            border: none;
+            padding: 14px 22px;
+            border-radius: 999px;
+            font-family: 'Barlow';
+            font-weight: 600;
+            font-size: .95rem;
+            cursor: pointer;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, .18);
+            transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
+        }
+
+        .fab-print button i {
+            font-size: 1.1rem;
+        }
+
+        .fab-print button:hover {
+            background: var(--azul-claro);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 18px 38px rgba(0, 0, 0, .22);
+        }
+
+        /* animação de entrada */
+        @keyframes fabIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(.9);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* mobile */
+        @media(max-width:600px) {
+            .fab-print {
+                right: 16px;
+                bottom: 16px;
+            }
+
+            .fab-print button {
+                padding: 14px 18px;
+            }
+        }
+
+        /* print */
+        @media print {
+            .fab-print {
+                display: none
+            }
+        }
+
+        .bar span {
+            display: block;
+            height: 100%;
+            background: #10c944;
+            border-radius: 6px;
+        }
+
+        .icon-wrapper i {
+            font-size: 64px;
+            color: #BC9C63;
+        }
+
+        /* ACTION */
+        .actions {
+            margin-top: 42px;
+            text-align: center;
+        }
+
+        .actions button {
+            background: var(--azul-escuro);
+            border: none;
+            padding: 14px 36px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-family: 'Barlow';
+            cursor: pointer;
+            color: #ffffff;
+        }
+
+        .actions button:hover {
+            background: var(--azul-claro);
+            border: none;
+            padding: 14px 36px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-family: 'Barlow';
+            cursor: pointer;
+            color: #ffffff;
+        }
+
+        /* PRINT */
+        @media print {
+
+            /* força impressão de cores */
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            /* garante que as barras apareçam */
+            .bar {
+                background: #e5e9f0 !important;
+                height: 6px !important;
+            }
+
+            .bar span {
+                background: #10c944 !important;
+            }
+
+            /* evita quebra de seção no meio da página */
+            .section {
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+
+            /* remove animações e overlays */
+            .celebration-overlay {
+                display: none !important;
+            }
+        }
+
+
+        /* ================= EMOJIS OVERLAY ================= */
+        .celebration-overlay {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 9999;
+        }
+
+        .celebration {
+            position: absolute;
+            font-size: 2rem;
+            animation: rise linear forwards;
+            opacity: 0, 95;
+        }
+        /* ================= QUESTÕES ================= */
+.questions-wrapper {
+    margin-top: 40px;
+}
+
+.toggle-questions {
+    width: 100%;
+    background: #fff;
+    border: 1px solid var(--border);
+    padding: 16px 20px;
+    border-radius: 12px;
+    font-family: 'Barlow';
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--azul-escuro);
+    transition: background .25s ease;
+}
+
+.toggle-questions:hover {
+    background: #f1f5f9;
+}
+
+.toggle-questions i {
+    transition: transform .3s ease;
+}
+
+.toggle-questions.active i {
+    transform: rotate(180deg);
+}
+
+/* container escondido */
+.questions {
+    margin-top: 16px;
+    display: none;
+    gap: 14px;
+}
+
+/* CARD DA QUESTÃO */
+.question {
+    border-radius: 12px;
+    padding: 16px 18px;
+    border: 1px solid var(--border);
+    background: var(--branco);
+}
+
+.question.correct {
+    border-left: 5px solid var(--verde);
+    background: #f0fdf4;
+}
+
+.question.wrong {
+    border-left: 5px solid var(--vermelho);
+    background: #fff1f2;
+}
+
+.question strong {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: .95rem;
+}
+
+.question.correct i {
+    color: var(--verde);
+}
+
+.question.wrong i {
+    color: var(--vermelho);
+}
+
+/* EXPLICAÇÃO */
+.explain {
+    margin-top: 10px;
+    font-size: .9rem;
+    line-height: 1.5;
+}
+
+.explain p {
+    margin: 4px 0;
+}
+
+.explain em {
+    display: block;
+    margin-top: 6px;
+    color: var(--muted);
+    font-style: normal;
+}
+
+
+        @keyframes rise {
+            0% {
+                transform: translateY(40px) scale(0.8) rotate(0deg);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-110vh) scale(1.15) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<div class="celebration-overlay" id="celebrationOverlay"></div>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const overlay = document.getElementById("celebrationOverlay");
+        const emojis = ["✅", "✅", "✅", "✅", "✅", "✅", "✅", "✅", "✅", "✅", "✅", "✅", "✅"];
+        const total = 90;
+        const duration = 9000;
+
+        for (let i = 0; i < total; i++) {
+            const el = document.createElement("div");
+            el.classList.add("celebration");
+            el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+
+            el.style.left = Math.random() * 100 + "vw";
+            el.style.bottom = "-40px";
+            el.style.animationDuration = (3 + Math.random() * 2) + "s";
+            el.style.animationDelay = Math.random() * 3 + "s";
+
+            overlay.appendChild(el);
+        }
+
+        setTimeout(() => {
+            overlay.remove();
+        }, duration);
+    });
+</script>
+
+
+<body>
+    <div class="wrapper">
+
+        <!-- HEADER -->
+        <div class="header">
+            <img src="/static/logo-brasfort.png">
+            <div>
+                <h1>BRASFORT PRO</h1>
+                <small>Relatório de Avaliação</small>
+            </div>
+        </div>
+
+        <!-- STATUS -->
+
+        <div class="card status">
+
+            <div>
+                <h2>Parabéns pelo seu Desempenho ✨</h2>
+
+                <p style="color: var(--muted);">Avaliação concluída com sucesso, em conformidade com os critérios
+                estabelecidos.</p>
+            </div>
+
+        </div>
+
+        <!-- IDENTIFICAÇÃO -->
+        <div class="card info">
+            <div class="info-item"><small>Colaborador</small><strong>{{ nome }}</strong></div>
+            <div class="info-item"><small>Matrícula</small><strong>{{ matricula }}</strong></div>
+            <div class="info-item"><small>Posto</small><strong>{{ posto }}</strong></div>
+            <div class="info-item"><small>Duração</small><strong>{{ tempo }}</strong></div>
+        </div>
+
+        <!-- RESULTADO -->
+        <div class="card score">
+
+            <div>
+                <h3>Feedback da Capacitação</h3>
+                <p>
+                    O colaborador demonstrou excelente desempenho no processo de capacitação referente ao Livro Ata
+                    Digital, iniciativa estratégica que representa um marco de modernização e eficiência nos processos
+                    da Brasfort.
+                </p>
+            </div>
+
+            <svg class="radial" viewBox="0 0 120 120">
+                {% set r = 52 %}
+                {% set c = 2 * 3.1416 * r %}
+                <circle class="bg" cx="60" cy="60" r="{{ r }}" />
+                <circle class="progress" cx="60" cy="60" r="{{ r }}" stroke-dasharray="{{ c }}"
+                    stroke-dashoffset="{{ c - (nota/100)*c }}" />
+                <text x="60" y="66" text-anchor="middle">{{ nota }}%</text>
+            </svg>
+
+        </div>
+
+
+        <!-- DETALHAMENTO -->
+        <div class="sections">
+            {% for i in range(1,6) %}
+            <div class="section">
+                <strong>Seção {{ i }} – {{ secoes_nomes[i] }}</strong>
+                <div class="bar">
+                    <span style="width:{{ secoes[i-1] }}%"></span>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+         <div class="questions-wrapper">
+    <button class="toggle-questions" onclick="toggleQuestions(this)">
+        <span><i class="fa-solid fa-list-check"></i> Ver detalhamento das questões</span>
+        <i class="fa-solid fa-chevron-down"></i>
+    </button>
+    
+    <div class="questions" id="questionsBox">
+        {% for q in questoes %}
+        <div class="question {{ 'correct' if q.acertou else 'wrong' }}">
+            <strong>
+                {% if q.acertou %}
+                <i class="fa-solid fa-circle-check"></i>
+                Questão {{ q.numero }} – Resposta correta
+                {% else %}
+                <i class="fa-solid fa-circle-xmark"></i>
+                Questão {{ q.numero }} – Resposta incorreta
+                {% endif %}
+            </strong>
+            <div class="explain">
+                <p><strong>Sua resposta:</strong> {{ q.marcada or 'Não respondida' }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+        <!-- FLOATING ACTION -->
+        <div class="fab-print">
+            <button onclick="window.print()">
+                <i class="fa-solid fa-file-pdf"></i>
+                Download Resultado
+            </button>
+        </div>
+
+    </div>
+</body>
+<script>
+    function toggleQuestions(button) {
+        const box = document.getElementById('questionsBox');
+        button.classList.toggle('active');
+
+        if (box.style.display === 'grid') {
+            box.style.display = 'none';
+        } else {
+            box.style.display = 'grid';
+        }
+    }
+</script>
+
+</html>

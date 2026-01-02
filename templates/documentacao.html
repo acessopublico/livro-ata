@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>BRASFORT | Livro Ata Digital</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="/static/style.css">
+
+    <script>
+        function abrirImagem(botao) {
+            const src = botao.dataset.img;
+            const modal = document.getElementById('imagem-livro');
+            const imagem = document.getElementById('imagem-modal');
+
+            imagem.src = src;
+            modal.style.display = 'flex';
+        }
+
+        function fecharImagem() {
+            const modal = document.getElementById('imagem-livro');
+            const imagem = document.getElementById('imagem-modal');
+
+            modal.style.display = 'none';
+            imagem.src = '';
+        }
+    </script>
+
+
+
+
+</head>
+
+
+<body>
+
+    <!-- HEADER MOBILE -->
+    <div class="header">
+        <h1>Livro Ata Digital</h1>
+        <button class="menu-btn" onclick="toggleMenu()">☰</button>
+    </div>
+
+    <div class="wrapper">
+
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar" id="sidebar">
+            <h2 class="title">Manual Operacional</h2>
+            <span>BRASFORT PRO</span>
+
+
+            <nav>
+                <a href="#introducao" onclick="closeMenu()">1. Introdução</a>
+                <a href="#acesso" onclick="closeMenu()">2. Acesso ao App</a>
+                <a href="#livroatadigital" onclick="closeMenu()">3. Acesso ao Livro</a>
+                <a href="#estrutura" onclick="closeMenu()">4. Estrutura</a>
+                <a href="#procedimentos" onclick="closeMenu()">5. Procedimentos</a>
+                <a href="#boas-praticas" onclick="closeMenu()">6. Boas Práticas</a>
+                <a href="#final" onclick="closeMenu()">7. Considerações</a>
+                <a href="#avaliacao" onclick="closeMenu()">8. Avaliação</a><br><br><br>
+            </nav>
+        </aside>
+
+
+        <!-- CONTEÚDO -->
+        <main class="content">
+
+            <section id="introducao">
+                <span class="badge">Introdução</span>
+                <h2>O que é o Livro Ata Digital</h2>
+
+                <div class="print-celular">
+                    <img src="/static/livroata.png" alt="Print da tela do celular">
+                </div>
+
+                <p>
+                    O Livro Ata Digital é <b>a versão eletrônica do livro físico de ocorrências</b>, utilizado para
+                    registrar
+                    informações operacionais, passagem de serviço, checagem de materiais e ocorrências, de forma segura,
+                    padronizada e rastreável, integrada ao sistema.
+                </p>
+
+            </section>
+
+            <section id="acesso">
+                <span class="badge">Acesso</span>
+                <h2>Acesso ao Aplicativo</h2>
+                <p>O Livro Ata Digital é acessado por meio do aplicativo <b>BRASFORT PRO</b>, disponível nos
+                    dispositivos
+                    móveis do posto.</p>
+                <p>O aplicativo pode ser obtido nas seguintes plataformas: <br><br>
+                </p>
+                <div class="download-apps">
+
+                    <!-- Google Play -->
+                    <div class="app-card">
+                        <a href="https://play.google.com/store/apps/details?id=com.performancelab.app.brasfort"
+                            target="_blank" class="app-button google-play">
+                            <img src="/static/logo-playstore.svg" alt="Disponível no Google Play">
+                        </a>
+                        <p class="app-legend">
+                            Nome do app na loja: <strong style="color: #253767; text-decoration: underline;">Brasfort
+                                PRO</strong>
+                        </p>
+                    </div>
+
+                    <!-- App Store -->
+                    <div class="app-card">
+                        <a href="https://apps.apple.com/br/app/performancelab-4-0/id1563664212" target="_blank"
+                            class="app-button app-store">
+                            <img src="/static/logo-appstore.png" alt="Disponível na App Store">
+                        </a>
+                        <p class="app-legend">
+                            Nome do app na loja: <strong
+                                style="color: #19a6df; text-decoration: underline;">Performancelab 4.0</strong>
+                        </p>
+                    </div>
+
+
+                </div>
+
+
+                <p>
+                <ol class="marcador">
+                    <li>Abra o aplicativo Brasfort PRO / Performancelab.</li>
+                    <li>Faça login utilizando o usuário disponibilizado.</li>
+                    <li>Informe a senha definida para o posto.</li>
+                    <li>Aguarde a sincronização completa do aplicativo.</li>
+                </ol>
+                </p>
+
+                <blockquote>
+                    <strong>Cuidados com credenciais</strong><br>
+                    <p>Não compartilhar usuário e senha;<br>
+                        Não anotar credenciais em locais expostos;</p>
+                </blockquote>
+                <div class="prints-celular">
+                    <div class="print-celular">
+                        <img src="/static/tela-login.png" alt="Print da tela do celular">
+                    </div>
+
+                    <div class="print-celular">
+                        <img src="/static/sincronizacao.png" alt="Print da tela do celular">
+                    </div>
+                </div>
+
+
+                <!-------------------------------------------------------------------------------------------------------------------------->
+
+                <!-------------------------------------------------------------------------------------------------------------------------->
+
+            </section>
+            <section id="livroatadigital">
+                <span class="badge">Livro Ata Digital</span>
+                <h2>Acesso ao Livro Ata Digital</h2>
+                <p>Clique no botão Livro Ata.</p>
+
+                <p>
+                <h3>Confirmações obrigatórias</h3>
+
+                <p>Siga todas as etapas a seguir:</p>
+
+                1. Confirmar usuário do posto<br>
+                2. Escanear o <b>QR-Code</b> do posto<br>
+                3. Confirmar o turno de serviço.<br><br>
+
+                Somente após essas etapas o sistema permitirá os registros.
+                </p>
+
+                <div class="prints-celular">
+
+                    <div class="print-celular">
+                        <img src="/static/apos-login.png" alt="Print da tela do celular">
+                    </div>
+
+
+                    <div class="print-celular">
+                        <img src="/static/confirmacao-inicial.png" alt="Print da tela do celular">
+                    </div>
+
+                    <div class="print-celular">
+                        <img src="/static/ler-qrcode.png" alt="Print da tela do celular">
+                    </div>
+                    <div class="print-celular">
+                        <img src="/static/turno.png" alt="Print da tela do celular">
+                    </div>
+
+
+                </div>
+
+            </section>
+            <section id="estrutura">
+                <span class="badge">Botões e Funções</span>
+                <h2>Estrutura do Livro</h2>
+
+                <h3>Botão: Anotação</h3> <!--anotacao-->
+                <p>Utilizado para registros textuais do plantão:<br>
+                <ul class="marcador">
+                    <li>Início do turno (recebimento do serviço)</li>
+                    <li>Registros durante o plantão, quando houver fatos relevantes</li>
+                    <li>Encerramento do turno (passagem de serviço)</li>
+                </ul>
+                <p>Permite também a <b>inclusão de imagens</b>, quando necessário.</p>
+                </p>
+
+
+                <div class="prints-celular">
+
+                    <div class="print-celular">
+                        <img src="/static/anotação.png" alt="Print da tela do celular">
+                    </div>
+
+
+                    <div class="print-celular">
+                        <img src="/static/reg-anotacoes.png" alt="Print da tela do celular">
+                    </div>
+
+                </div>
+
+            
+                <hr> <!-- Linha Horizontal -->
+                <h3>Botão: Materiais</h3> <!--MATERIAIS-->
+                <p>Local destinado à checagem dos materiais e equipamentos do posto:<br>
+                <ul class="marcador">
+                    <li>Marcação de status 👍 (Em conformidade) ou 👎 (Não conforme)</li>
+                    <li>Inserção de observações quando necessário</li>
+                    <li>Alerta visual (triângulo) indicando a obrigatoriedade da verificação em cada turno</li>
+                </ul>
+
+                <div class="prints-celular">
+
+                    <div class="print-celular">
+                        <img src="/static/materiais.png" alt="Print da tela do celular">
+                    </div>
+
+
+                    <div class="print-celular">
+                        <img src="/static/material1.png" alt="Print da tela do celular">
+                    </div>
+
+                </div>
+
+            
+
+                </p>
+                <hr> <!-- Linha Horizontal -->
+                <h3>Botão: Eventos / ocorrências</h3>
+                <p>
+                    Registro de qualquer anormalidade ou incidente, como situações de risco, furto, roubo, comportamento
+                    suspeito ou eventos que impactem a segurança. <br>
+
+                    Além do registro no sistema, o colaborador deve <b>comunicar imediatamente o supervisor responsável
+                        pelo contrato e o executor do contrato</b>, conforme fluxo interno.
+                </p>
+
+
+                <div class="print-celular">
+                        <img src="/static/eventos.png" alt="Print da tela do celular">
+                </div>
+
+                <hr> <!-- Linha Horizontal -->
+                <h3>Botão: Páginas do Livro Ata</h3>
+                <p>
+                    Permite a visualização dos registros realizados, organizados por abas:
+                <ul class="marcador">
+                    <li><strong>Logins:</strong> acessos realizados</li>
+                    <li><strong>Materiais:</strong> checagens e responsáveis</li>
+                    <li><strong>Anotações:</strong> textos registrados</li>
+                    <li><strong>Eventos:</strong> ocorrências registradas</li>
+                    <li><strong>Supervisão:</strong> assinaturas e validações</li>
+                </ul>
+
+                 <div class="prints-celular">
+
+                    <div class="print-celular">
+                        <img src="/static/paginas.png" alt="Print da tela do celular">
+                    </div>
+
+
+                    <div class="print-celular">
+                        <img src="/static/pagina.png" alt="Print da tela do celular">
+                    </div>
+
+                </div>
+
+                </p>
+                <hr> <!-- Linha Horizontal -->
+                <h3>Botão: Finalizar Plantão</h3>
+                <p>
+                    Utilizado ao término do turno para encerramento formal do plantão, permitindo a continuidade do
+                    próximo colaborador.
+                </p>
+
+                 <div class="prints-celular">
+
+                    <div class="print-celular">
+                        <img src="/static/finalizar-plantao.png" alt="Print da tela do celular">
+                    </div>
+
+
+                    <div class="print-celular">
+                        <img src="/static/finalizacao1.png" alt="Print da tela do celular">
+                    </div>
+
+                </div>
+               
+            </section>
+
+
+            <section id="procedimentos">
+                <span class="badge">Procedimentos</span>
+                <h2>Procedimentos Operacionais do Livro Ata</h2>
+                <div>
+                    <h3>Uso Obrigatório no Plantão</h3>
+                    <p>O Livro Ata Digital é o registro oficial do plantão. Todas as informações inseridas devem
+                        refletir fielmente os acontecimentos, <b>garantindo continuidade do serviço, rastreabilidade e
+                            respaldo operacional.</b></p>
+
+                    <hr> <!-- Linha Horizontal -->
+
+                    <h3>Início do Plantão</h3>
+                    <p>Antes de qualquer atividade, o colaborador deve <b>ler todos os registros desde o último
+                            plantão</b>, assegurando ciência de ocorrências, pendências e orientações em andamento.<br>
+                        No recebimento do serviço, registre o <b>horário de início do turno</b>, o <b>nome do vigilante
+                            do turno anterior</b> e qualquer alteração identificada. <br>
+                        Registre os <b>nomes e matrículas</b> de todos os colaboradores em serviço, bem como os
+                        <b>materiais do posto</b>, informando sua disponibilidade e condições de uso.
+                    </p>
+                    <blockquote>
+                        <strong>Exemplo de registro:</strong> <br><br>
+                        Eu, NOME COLABORADOR, matrícula XXXXX, estou recebendo a passagem de serviço
+                        do colaborador NOME DO COLABORADOR, matrícula XXXXX.<br>
+                        Equipamentos conferidos. <br>
+                        Plantão composto também pelos colaboradores e suas respectivas matriculas: (quando aplicável).
+                    </blockquote>
+
+                    <p>A leitura é condição obrigatória para o recebimento do serviço.</p>
+
+                    <hr> <!-- Linha Horizontal -->
+
+                    <h3>Durante o Plantão</h3>
+                    <p>Toda situação relevante deve ser registrada no Livro Ata Digital <b>no momento em que
+                            ocorrer</b>, incluindo ocorrências, orientações recebidas, anormalidades e ações executadas.
+                        <br>
+                        Qualquer <b>retirada ou devolução de materiais</b> deve ser registrada, garantindo controle e
+                        responsabilidade sobre os equipamentos do posto.
+                    </p>
+
+                    <hr> <!-- Linha Horizontal -->
+
+                    <h3>Finalização do Plantão</h3>
+                    <p>O plantão deve ser encerrado exclusivamente pelo botão <b>"Finalizar Plantão”</b>. <br>
+                        Antes de finalizar, confirme que <b>todas as ocorrências e anotações foram registradas</b>. <br>
+                        Após a finalização, <b>não será possível editar ou incluir informações</b>.</p>
+
+                </div>
+
+            </section>
+
+            <!-- Boas Práticas -->
+            <section id="boas-praticas">
+                <span class="badge">Qualidade</span>
+                <h2>Boas Práticas</h2>
+                <p>
+                <ul class="marcador">
+                    <li>Utilize linguagem simples e profissional, registre os fatos em tempo real, seja objetivo e
+                        confira as informações antes de salvar ou finalizar o plantão</li>
+                    <li>Evite registros vagos, termos informais, lançamentos fora do horário do ocorrido e repetições
+                        desnecessárias.</li>
+
+                </ul>
+                </p>
+            </section>
+
+            <!-- Considerações Finais -->
+            <section id="final">
+                <span class="badge">Encerramento</span>
+                <h2>Considerações Finais</h2>
+                <p>O Livro Ata Digital é uma ferramenta essencial para o seu trabalho diário. Ao utilizá-lo
+                    corretamente, você demonstra <b>responsabilidade, comprometimento e profissionalismo</b>, atuando de
+                    forma
+                    <b>antecipatória</b>, aprendendo com cada registro (<b>antifrágil</b>) e respondendo às situações
+                    com <b>agilidade</b>.
+                </p>
+                <p>A Brasfort reconhece e valoriza os colaboradores que cumprem seus procedimentos com <b>atenção,
+                        cuidado
+                        e excelência</b>, pois registros bem feitos fortalecem a operação, a equipe e a tomada de
+                    decisão.</p>
+                <p>Sempre que surgirem dúvidas ou situações não previstas, procure a <b>supervisão responsável</b>.</p>
+                <p>A qualidade da informação começa com você e faz toda a diferença no resultado do serviço.</p>
+            </section>
+            <div class="avaliacao-card" id="avaliacao">
+                <div class="avaliacao-conteudo">
+                    <span class="badge-ava">Encerramento</span>
+                    <h3>Avaliação Rápida de Conteúdo</h3>
+                    <p>
+                        Leva menos de <strong>2 minutos</strong>.
+                        Sua opinião é essencial para aprimorarmos continuamente nossos materiais.
+                    </p>
+
+                    <ul>
+                        <li>✔ Simples e objetiva</li>
+                        <li>✔ Respostas rápidas</li>
+                        <li>✔ Contribui para melhorias reais</li>
+                    </ul>
+
+
+                    <button onclick="window.location.href='{{ url_for('avaliacao') }}'">
+                        Ir para Avaliação
+                    </button>
+
+                </div>
+            </div>
+
+            <footer>
+                <img src="https://pro.brasfort.com.br/Includes/img/Empresas/brasfort_logo.png" style="width: 200px ;"
+                    alt="Logo Brasfort">
+                <p style="color: #253767;">© Brasfort PRO · Manual Operacional do Livro Ata Digital</p>
+            </footer>
+
+        </main>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById('sidebar').classList.toggle('active');
+        }
+
+        function closeMenu() {
+            document.getElementById('sidebar').classList.remove('active');
+        }
+    </script>
+
+</body>
+
+</html>

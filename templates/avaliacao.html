@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>BRASFORT | Livro Ata Digital</title>
+
+    <!-- Fonte -->
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Barlow', sans-serif;
+        }
+
+
+
+        /* ===== HEADER ===== */
+        .topo {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: #0f172a;
+            color: #fff;
+            padding: 12px 16px;
+            z-index: 1000;
+        }
+
+        .topo-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+        }
+
+        /* Oculta títulos de seção durante a avaliação */
+        .secao>h3 {
+            display: none;
+        }
+
+        /* ===== CARD FIXO DA AVALIAÇÃO ===== */
+        .card-avaliacao {
+            flex: 1;
+            max-width: 900px;
+            width: 100%;
+            height: 100%;
+            margin: 0 auto;
+
+            display: flex;
+            flex-direction: column;
+
+            padding: 16px;
+        }
+
+
+
+
+
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+        }
+
+        .app-avaliacao {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+
+            background:
+                linear-gradient(rgba(5, 145, 226, 0.566), rgba(15, 23, 42, 0.85)),
+                url('https://www.brasfort.com.br/images/2020/10/11/whatsapp-image-2020-08-21-at-21.33.59.jpeg') center / cover no-repeat fixed;
+        }
+
+        .form-avaliacao {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding-top: 110px;
+            /* header */
+        }
+
+
+        /* VALIDO Conteúdo interno pode rolar */
+        .pergunta {
+            flex: 1;
+            display: none;
+
+            overflow-y: auto;
+            height: calc(100vh - 260px);
+            /* header (110) + footer (80) + respiro */
+
+            background: rgba(255, 255, 255, 0.96);
+            border-radius: 18px;
+            padding: 28px 24px;
+        }
+
+        .pergunta.ativa {
+            display: block;
+        }
+
+        .pergunta p {
+            font-weight: 700;
+            /* negrito */
+            font-size: 18px;
+            color: #0f172a;
+            margin-bottom: 18px;
+        }
+
+
+        @media (max-width: 640px) {
+            .card-avaliacao {
+                height: 320px;
+            }
+        }
+
+
+        .barra-container {
+            margin-top: 8px;
+            height: 6px;
+            background: #1e293b;
+            border-radius: 10px;
+        }
+
+        .barra-progresso {
+            height: 100%;
+            width: 0%;
+            background: #38bdf8;
+            border-radius: 10px;
+            transition: width 0.4s ease;
+        }
+
+        /* ===== FORM ===== */
+        form {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+
+        label {
+            display: block;
+            background: #fff;
+            border-radius: 10px;
+            padding: 14px;
+            margin-bottom: 12px;
+            border: 1px solid #e5e7eb;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        label:hover {
+            background: #e0f2fe;
+        }
+
+        input[type="radio"] {
+            margin-right: 8px;
+        }
+
+        /* ===== BOTÃO FINAL ===== */
+        .btn-enviar {
+            position: fixed;
+            bottom: 96px;
+            /* acima do rodapé */
+            left: 50%;
+            transform: translateX(-50%);
+
+            width: calc(100% - 48px);
+            max-width: 420px;
+
+            padding: 18px 22px;
+            font-size: 16px;
+            font-weight: 700;
+
+            border: none;
+            border-radius: 18px;
+
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            color: #ffffff;
+
+            cursor: pointer;
+            z-index: 2000;
+
+            display: none;
+            animation: pulse 1.6s infinite;
+            box-shadow: 0 18px 40px rgba(22, 163, 74, 0.45);
+        }
+
+        .btn-enviar::before {
+            content: "";
+            position: absolute;
+            inset: -18px;
+            background: radial-gradient(circle,
+                    rgba(34, 197, 94, 0.25),
+                    rgba(34, 197, 94, 0.0) 70%);
+            z-index: -1;
+            border-radius: 28px;
+        }
+
+
+        /* Animação */
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.6);
+            }
+
+            70% {
+                box-shadow: 0 0 0 14px rgba(34, 197, 94, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+            }
+        }
+
+
+        .btn-enviar:hover {
+            background: #16a34a;
+        }
+
+        .topo {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: linear-gradient(135deg, #0f172a, #020617);
+            color: #fff;
+            padding: 12px 16px 16px;
+            z-index: 1000;
+        }
+
+        .topo-brand {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 6px;
+}
+
+
+        .topo-brand img {
+    height: 28px;
+}
+.titulo-avaliacao {
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    opacity: 0.85;
+    text-align: right;
+    white-space: nowrap;
+}
+
+
+        .topo-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .navegacao {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .nav-btn {
+            flex: 1;
+            padding: 14px;
+            border-radius: 12px;
+            border: 1px solid #cbd5f5;
+            background: #f8fafc;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .nav-btn.primary {
+            background: #2563eb;
+            color: #fff;
+            border: none;
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+       
+        .titulo-avaliacao {
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            opacity: 0.85;
+        }
+
+        .nav-btn {
+            flex: 1;
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid #e5e7eb;
+            background: #ffffff;
+            font-size: 14px;
+            font-weight: 500;
+            color: #334155;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .nav-btn:hover {
+            background: #f1f5f9;
+        }
+
+        .nav-btn.primary {
+            background: #0f172a;
+            color: #ffffff;
+            border: none;
+        }
+
+        .nav-btn.primary:hover {
+            background: #020617;
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.35;
+            cursor: not-allowed;
+        }
+
+
+
+        /* ===== RESPOSTA SELECIONADA ===== */
+        label {
+            position: relative;
+        }
+
+        label input[type="radio"] {
+            accent-color: #0f172a;
+        }
+
+        /* Quando o radio estiver selecionado */
+        label:has(input[type="radio"]:checked) {
+            background: linear-gradient(135deg, #e0f2fe, #f0f9ff);
+            border-color: #38bdf8;
+            color: #0f172a;
+            box-shadow: 0 8px 20px rgba(56, 189, 248, 0.25);
+            transform: scale(1.01);
+        }
+
+        .rodape-avaliacao {
+            position: sticky;
+            bottom: 0;
+
+            padding: 16px;
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+
+            background: rgba(255, 255, 255, 0.98);
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .rodape-avaliacao button {
+            flex: 1;
+            max-width: 240px;
+        }
+
+        @media (max-width: 640px) {
+            .card-avaliacao {
+                max-width: 100%;
+            }
+
+            .pergunta {
+                padding: 20px 16px;
+            }
+        }
+
+
+
+
+        @keyframes fadeSlideIn {
+            from {
+                transform: translateY(8px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+
+
+        /* ===== ANIMAÇÃO ===== */
+        @keyframes slideIn {
+            from {
+                transform: translateX(-30px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app-avaliacao">
+
+        <!-- ================= HEADER FIXO ================= -->
+        <header class="topo">
+            <div class="topo-brand">
+                <img src="/static/brasfort-logo2.png" alt="Brasfort PRO">
+                <span class="titulo-avaliacao">Avaliação Rápida</span>
+            </div>
+
+
+            <div class="topo-info">
+                <span id="contador">Pergunta 1 de 15</span>
+                <span id="timer">⏱ 00:00</span>
+            </div>
+
+            <div class="barra-container">
+                <div class="barra-progresso" id="barra"></div>
+            </div>
+        </header>
+
+
+
+        <!-- ================= FORMULÁRIO ================= -->
+
+        <form method="POST" action="/avaliacao" class="form-avaliacao">
+            <div class="card-avaliacao">
+                <!-- ================= SEÇÃO 1 ================= -->
+                <div class="secao">
+                    <h3>🧩 SEÇÃO 1 – Objetivo e Finalidade do Livro Ata Digital</h3>
+
+                    <div class="pergunta">
+                        <p><strong>1.</strong> Qual é o principal objetivo do Livro Ata Digital?</p>
+                        <label><input type="radio" name="q1" value="A" required> A) Controlar escalas de serviço</label>
+                        <label><input type="radio" name="q1" value="B">B) Garantir registros operacionais rastreáveis e
+                            padronizados</label>
+                        <label><input type="radio" name="q1" value="C"> C) Substituir relatórios administrativos</label>
+                        <label><input type="radio" name="q1" value="D"> d) Registrar apenas ocorrências graves</label>
+                    </div>
+
+                    <div class="pergunta">
+                        <p><strong>2.</strong> O Livro Ata Digital contribui para a continuidade do serviço e apoio à
+                            gestão
+                            e
+                            auditoria operacional.</p>
+                        <label><input type="radio" name="q2" value="A" required> Verdadeiro</label>
+                        <label><input type="radio" name="q2" value="B"> Falso</label>
+                    </div>
+
+                    <div class="pergunta">
+                        <p><strong>3.</strong> Qual das opções abaixo representa corretamente uma finalidade do Livro
+                            Ata
+                            Digital?</p>
+                        <label><input type="radio" name="q3" value="A" required>A) Controle financeiro do posto</label>
+                        <label><input type="radio" name="q3" value="B">B) Passagem de serviço entre turnos</label>
+                        <label><input type="radio" name="q3" value="C">C) Avaliação de desempenho individual</label>
+                        <label><input type="radio" name="q3" value="D">D) Comunicação interna administrativa</label>
+                    </div>
+                </div>
+
+                <!-- ================= SEÇÃO 2 ================= -->
+                <div class="secao">
+                    <h3>🧩 SEÇÃO 2 – Responsabilidades e Consequências</h3>
+
+                    <div class="pergunta">
+                        <p><strong>4.</strong> Quem deve realizar os registros no Livro Ata Digital?</p>
+                        <label><input type="radio" name="q4" value="A" required>A) Apenas supervisores</label>
+                        <label><input type="radio" name="q4" value="B">B) Colaboradores em serviço e líderes de
+                            turno</label>
+                        <label><input type="radio" name="q4" value="C">C) Somente gestores operacionais</label>
+                        <label><input type="radio" name="q4" value="D">D) Setor administrativo</label>
+                    </div>
+
+                    <div class="pergunta">
+                        <p><strong>5.</strong> Supervisores, coordenadores e gestores operacionais são responsáveis por
+                            validar
+                            e acompanhar os registros.</p>
+                        <label><input type="radio" name="q5" value="V" required> Verdadeiro</label>
+                        <label><input type="radio" name="q5" value="F"> Falso</label>
+                    </div>
+
+                    <div class="pergunta">
+                        <p><strong>6.</strong> Qual consequência pode ocorrer devido à ausência ou erro de registros?
+                        </p>
+                        <label><input type="radio" name="q6" value="A" required>A) Ajuste automático pelo sistema</label>
+                        <label><input type="radio" name="q6" value="B">B) Falhas na continuidade do serviço</label>
+                        <label><input type="radio" name="q6" value="C">C) Apenas advertência verbal informal</label>
+                        <label><input type="radio" name="q6" value="D">D) Nenhuma, se o turno for tranquilo</label>
+                    </div>
+                </div>
+
+                <!-- ================= SEÇÃO 3 ================= -->
+                <div class="secao">
+                    <h3>🧩 SEÇÃO 3 – Acesso ao Sistema e Confirmações</h3>
+
+                    <div class="pergunta">
+                        <p><strong>7.</strong> Antes de acessar o Livro Ata Digital, o colaborador deve:</p>
+                        <label><input type="radio" name="q7" value="A" required>A) Clicar diretamente em “Livro
+                            Ata”</label>
+                        <label><input type="radio" name="q7" value="B">B) Aguardar a sincronização completa do
+                            aplicativo</label>
+                        <label><input type="radio" name="q7" value="C">C) Registrar a passagem de serviço
+                            manualmente</label>
+                        <label><input type="radio" name="q7" value="D">D) Encerrar o turno anterior</label>
+                    </div>
+
+                    <div class="pergunta">
+                        <p><strong>8.</strong> O sistema permite registros sem a confirmação do usuário do posto,
+                            QR-Code e
+                            turno.</p>
+                        <label><input type="radio" name="q8" value="V" required> Verdadeiro</label>
+                        <label><input type="radio" name="q8" value="F"> Falso</label>
+                    </div>
+
+                    <div class="pergunta">
+                        <p><strong>9.</strong> Qual cuidado é obrigatório em relação às credenciais de acesso?</p>
+                        <label><input type="radio" name="q9" value="A" required>A) Compartilhar apenas com líderes</label>
+                        <label><input type="radio" name="q9" value="B">B) Anotar em local visível para o posto</label>
+                        <label><input type="radio" name="q9" value="C">C) Não compartilhar usuário e senha</label>
+                        <label><input type="radio" name="q9" value="D">D) Alterar a senha a cada turno</label>
+                    </div>
+                </div>
+
+                <!-- ================= SEÇÃO 4 ================= -->
+                <div class="secao">
+                    <h3>🧩 SEÇÃO 4 – Funcionalidades do Livro Ata Digital</h3>
+
+                    <div class="pergunta">
+                        <p><strong>10.</strong> Qual função é utilizada para registros textuais do plantão?</p>
+                        <label><input type="radio" name="q10" value="A" required>A) Materiais</label>
+                        <label><input type="radio" name="q10" value="B">B) Eventos</label>
+                        <label><input type="radio" name="q10" value="C">C) Anotações</label>
+                        <label><input type="radio" name="q10" value="D">D) Supervisão</label>
+                    </div>
+
+                    <div class="pergunta">
+                        <p><strong>11.</strong> Na função “Materiais”, o colaborador deve marcar o status como OK ou Não
+                            Conforme em cada turno.</p>
+                        <label><input type="radio" name="q11" value="V" required> Verdadeiro</label>
+                        <label><input type="radio" name="q11" value="F"> Falso</label>
+                    </div>
+
+                    <div class="pergunta">
+                        <p><strong>12.</strong> Durante o plantão ocorre uma anormalidade de segurança. O procedimento
+                            correto
+                            é:</p>
+                        <label><input type="radio" name="q12" value="A" required>A) Registrar apenas no encerramento do
+                            turno</label>
+                        <label><input type="radio" name="q12" value="B">B) Registrar no Livro Ata Digital e comunicar o
+                            supervisor
+                            responsável</label>
+                        <label><input type="radio" name="q12" value="C">C) Informar apenas verbalmente ao próximo
+                            turno</label>
+                        <label><input type="radio" name="q12" value="D">D) Registrar somente se solicitado</label>
+                    </div>
+
+                    <div class="pergunta">
+                        <p><strong>13.</strong> Um equipamento do posto foi retirado temporariamente. O que deve ser
+                            feito?
+                        </p>
+                        <label><input type="radio" name="q13" value="A" required>A) Não registrar, pois será
+                            devolvido</label>
+                        <label><input type="radio" name="q13" value="B">B) Registrar a retirada e a devolução no
+                            sistema</label>
+                        <label><input type="radio" name="q13" value="C">C) Informar apenas no relatório mensal</label>
+                        <label><input type="radio" name="q13" value="D">D) Registrar apenas se houver perda</label>
+                    </div>
+                </div>
+
+                <!-- ================= SEÇÃO 5 ================= -->
+                <div class="secao">
+                    <h3>🧩 SEÇÃO 5 – Procedimentos e Boas Práticas</h3>
+
+                    <div class="pergunta">
+                        <p><strong>14.</strong> No campo Anotações, devem ser utilizados cabeçalho e rodapé para
+                            padronização.
+                        </p>
+                        <label><input type="radio" name="q14" value="V" required> Verdadeiro</label>
+                        <label><input type="radio" name="q14" value="F"> Falso</label>
+                    </div>
+
+                    <div class="pergunta">
+                        <p><strong>15.</strong> Em caso de dúvida ou situação não prevista no manual, o colaborador
+                            deve:
+                        </p>
+                        <label><input type="radio" name="q15" value="A" required>A) Resolver da forma que julgar
+                            melhor</label>
+                        <label><input type="radio" name="q15" value="B">B) Ignorar a situação</label>
+                        <label><input type="radio" name="q15" value="C">C) Acionar imediatamente a supervisão
+                            responsável</label>
+                        <label><input type="radio" name="q15" value="D">D) Registrar apenas no dia seguinte</label>
+                    </div>
+                </div>
+            </div>
+            <!--BOTOES DE NAVEGACAO-->
+
+            <footer class="rodape-avaliacao">
+                <button type="button" id="btnVoltar" class="nav-btn">
+                    ← Voltar
+                </button>
+
+                <button type="button" id="btnAvancar" class="nav-btn primary">
+                    Avançar →
+                </button>
+
+                <button type="submit" id="btnEnviar" class="btn-enviar">
+                    Finalizar Avaliação
+                </button>
+            </footer>
+
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('input[type="radio"]').forEach(r => r.checked = false);
+        });
+
+        const perguntas = document.querySelectorAll('.pergunta');
+        const contador = document.getElementById('contador');
+        const barra = document.getElementById('barra');
+        const btnVoltar = document.getElementById('btnVoltar');
+        const btnAvancar = document.getElementById('btnAvancar');
+        const btnEnviar = document.getElementById('btnEnviar');
+
+        let atual = 0;
+        const total = perguntas.length;
+
+        mostrarPergunta();
+
+        /* TIMER */
+        let segundos = 0;
+        setInterval(() => {
+            segundos++;
+            const min = String(Math.floor(segundos / 60)).padStart(2, '0');
+            const sec = String(segundos % 60).padStart(2, '0');
+            document.getElementById('timer').textContent = `⏱ ${min}:${sec}`;
+        }, 1000);
+
+        function mostrarPergunta() {
+            perguntas.forEach(p => p.classList.remove('ativa'));
+            perguntas[atual].classList.add('ativa');
+
+            contador.textContent = `Pergunta ${atual + 1} de ${total}`;
+            barra.style.width = `${((atual + 1) / total) * 100}%`;
+
+            btnVoltar.disabled = atual === 0;
+            validarAvanco();
+
+            if (atual === total - 1) {
+                btnEnviar.style.display = 'block';
+                btnAvancar.disabled = true;
+            } else {
+                btnEnviar.style.display = 'none';
+            }
+
+        }
+
+        function validarAvanco() {
+            const respondida = perguntas[atual].querySelector('input[type="radio"]:checked');
+            btnAvancar.disabled = !respondida;
+        }
+
+        btnAvancar.addEventListener('click', () => {
+            if (atual < total - 1) {
+                atual++;
+                mostrarPergunta();
+            }
+        });
+
+        btnVoltar.addEventListener('click', () => {
+            if (atual > 0) {
+                atual--;
+                mostrarPergunta();
+            }
+        });
+        let autoAdvanceTimeout = null;
+
+
+        document.querySelectorAll('input[type="radio"]').forEach(radio => {
+            radio.addEventListener('change', () => {
+
+                validarAvanco();
+
+                // Limpa qualquer avanço pendente
+                if (autoAdvanceTimeout) {
+                    clearTimeout(autoAdvanceTimeout);
+                }
+
+                // Avança automaticamente após 1 segundos
+                autoAdvanceTimeout = setTimeout(() => {
+                    if (atual < total - 1) {
+                        atual++;
+                        mostrarPergunta();
+                    }
+                }, 500);
+            });
+        });
+
+    </script>
+</body>
+
+</html>
